@@ -1,12 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:marvel_t/data/models/superhero_model.dart';
+import 'package:marvel_t/data/services/auth/auth_service.dart';
 import 'package:marvel_t/features/authorization/iron_man_speech.dart';
 import 'package:marvel_t/features/background.dart';
 import 'package:marvel_t/theme.dart';
 
 import '../hello_screen/speech_buble.dart';
 
-class RegistrationScreen extends StatelessWidget {
+class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({super.key});
+
+  @override
+  State<RegistrationScreen> createState() => _RegistrationScreenState();
+}
+
+class _RegistrationScreenState extends State<RegistrationScreen> {
+  TextEditingController nicknameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    nicknameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +50,10 @@ class RegistrationScreen extends StatelessWidget {
                       height: 20,
                     ),
                     TextField(
-                      // controller: passwordController,
+                      controller: nicknameController,
                       style: Theme.of(context).textTheme.titleSmall,
                       decoration: InputDecoration(
-                        labelText: 'SUPERHERO Name',
+                        labelText: 'SUPERHERO NickName',
                         labelStyle: Theme.of(context).textTheme.titleSmall,
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30.0),
@@ -55,7 +75,7 @@ class RegistrationScreen extends StatelessWidget {
                       height: 10,
                     ),
                     TextField(
-                      // controller: passwordController,
+                      controller: emailController,
                       style: Theme.of(context).textTheme.titleSmall,
                       decoration: InputDecoration(
                         labelText: 'SUPER Email',
@@ -80,7 +100,7 @@ class RegistrationScreen extends StatelessWidget {
                       height: 10,
                     ),
                     TextField(
-                     // controller: passwordController,
+                      controller: passwordController,
                       style: Theme.of(context).textTheme.titleSmall,
                       decoration: InputDecoration(
                         labelText: 'SUPER SECRET Password',
@@ -113,6 +133,14 @@ class RegistrationScreen extends StatelessWidget {
                     ),
                     ElevatedButton(
                       onPressed: () {
+                        SuperheroModel newHero = SuperheroModel(
+                            username: nicknameController.text,
+                            email: emailController.text,
+                            password: passwordController.text
+                        );
+
+                        AuthService().registerSuperhero(newHero);
+                        Navigator.pushReplacementNamed(context, '/entering');
                       },
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(Colors.white),

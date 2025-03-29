@@ -1,11 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:marvel_t/data/models/superhero_model.dart';
 
+import '../../data/services/auth/auth_service.dart';
 import '../../theme.dart';
 import '../background.dart';
 import 'iron_man_speech.dart';
 
-class EnteringScreen extends StatelessWidget {
+class EnteringScreen extends StatefulWidget {
   const EnteringScreen({super.key});
+
+  @override
+  State<EnteringScreen> createState() => _EnteringScreenState();
+}
+
+class _EnteringScreenState extends State<EnteringScreen> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +46,7 @@ class EnteringScreen extends StatelessWidget {
                       height: 20,
                     ),
                     TextField(
-                      // controller: passwordController,
+                      controller: emailController,
                       style: Theme.of(context).textTheme.titleSmall,
                       decoration: InputDecoration(
                         labelText: 'SUPER Email',
@@ -54,7 +71,7 @@ class EnteringScreen extends StatelessWidget {
                       height: 10,
                     ),
                     TextField(
-                      // controller: passwordController,
+                      controller: passwordController,
                       style: Theme.of(context).textTheme.titleSmall,
                       decoration: InputDecoration(
                         labelText: 'SUPER SECRET Password',
@@ -86,7 +103,14 @@ class EnteringScreen extends StatelessWidget {
                       height: 15,
                     ),
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async{
+                        SuperheroModel hero = SuperheroModel(
+                            email: emailController.text,
+                            password: passwordController.text
+                        );
+                        if(await AuthService().signInSuperhero(hero)){
+                          //Navigator.pushNamed(context, "/bottomNavBar");
+                        }
                       },
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
