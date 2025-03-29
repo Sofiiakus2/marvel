@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "543688558218",
+    "project_id": "marvel-t",
+    "storage_bucket": "marvel-t.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:543688558218:android:8a3d89e0f94994c74f0f73",
+        "android_client_info": {
+          "package_name": "com.example.marvel_t"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgxj5t2avsPwVRBb43D_3BuhWClVURaK8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
