@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marvel_t/data/models/mission_model.dart';
 import 'package:marvel_t/data/services/missions_service.dart';
 import 'package:marvel_t/theme.dart';
 
 import '../../data/models/enums.dart';
+import '../../state_management/progress_cubit.dart';
 
 
 class TaskBlockView extends StatefulWidget {
@@ -116,7 +118,11 @@ class _TaskBlockViewState extends State<TaskBlockView> {
                         SizedBox(width: 10,),
                         GestureDetector(
                           onTap: (){
-                            MissionModel updatedMission = widget.mission.copyWith(status: StatusEnum.completed); // Зберігаємо оновлену копію
+                            MissionModel updatedMission = widget.mission.copyWith(
+                                status: StatusEnum.completed,
+                                completedAt: DateTime.now(),
+                            );
+
                             MissionService().updateMission(updatedMission);
                           },
                           child: Icon(

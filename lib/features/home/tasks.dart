@@ -34,10 +34,10 @@ class TasksListView extends StatelessWidget {
                 },
                   child: IronManSpeech(ironManText: 'Tap to create first mission!')));
         }
-        context.read<ProgressCubit>().updateProgress(snapshot.data!);
+        context.read<ProgressCubit>().updateProgress(missions);
         return ListView.builder(
           shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
+          physics: const AlwaysScrollableScrollPhysics(),
           itemCount: missions.length + 1  ,
           itemBuilder: (context, index) {
 

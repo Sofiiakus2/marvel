@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marvel_t/data/models/superhero_model.dart';
 import 'package:marvel_t/data/services/auth/auth_service.dart';
 import 'package:marvel_t/features/authorization/iron_man_speech.dart';
 import 'package:marvel_t/features/background.dart';
 import 'package:marvel_t/theme.dart';
 
+import '../../state_management/progress_cubit.dart';
 import '../hello_screen/speech_buble.dart';
 
 class RegistrationScreen extends StatefulWidget {
@@ -140,6 +142,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         );
 
                         AuthService().registerSuperhero(newHero);
+                        context.read<ProgressCubit>().initializeEnergy();
                         Navigator.pushReplacementNamed(context, '/entering');
                       },
                       style: ButtonStyle(
