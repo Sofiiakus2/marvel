@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marvel_t/data/models/mission_model.dart';
 import 'package:marvel_t/data/services/missions_service.dart';
 import 'package:marvel_t/theme.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../data/models/enums.dart';
 import '../../state_management/progress_cubit.dart';
@@ -11,10 +12,12 @@ import '../../state_management/progress_cubit.dart';
 class TaskBlockView extends StatefulWidget {
   const TaskBlockView({
     super.key,
-    required this.mission
+    required this.mission, required this.missions
+
   });
 
   final MissionModel mission;
+  final List<MissionModel> missions;
 
   @override
   State<TaskBlockView> createState() => _TaskBlockViewState();
@@ -117,14 +120,47 @@ class _TaskBlockViewState extends State<TaskBlockView> {
                           ),                    ),
                         SizedBox(width: 10,),
                         GestureDetector(
-                          onTap: (){
-                            MissionModel updatedMission = widget.mission.copyWith(
-                                status: StatusEnum.completed,
-                                completedAt: DateTime.now(),
-                            );
+                          onTap: () async {
+                            final prefs = await SharedPreferences.getInstance();
+                            double savedEnergy = prefs.getDouble('energy') ?? 1.0;
 
-                            MissionService().updateMission(updatedMission);
+                            double energyRequired = 0.0;
+
+                            switch (widget.mission.treatLevel) {
+                              case TreatLevelEnum.low:
+                                energyRequired = 0.1;
+                                break;
+                              case TreatLevelEnum.medium:
+                                energyRequired = 0.25;
+                                break;
+                              case TreatLevelEnum.high:
+                                energyRequired = 0.45;
+                                break;
+                              case TreatLevelEnum.worldEnding:
+                                energyRequired = 0.7;
+                                break;
+                            }
+
+                            if (savedEnergy < energyRequired) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text('Your energy is too low!'))
+                              );
+                              return;
+                            }
+
+                            MissionModel updatedMission = widget.mission.copyWith(
+                              status: StatusEnum.completed,
+                              completedAt: DateTime.now(),
+                            );
+                            await MissionService().updateMission(updatedMission);
+
+                            double newEnergy = (savedEnergy - energyRequired).clamp(0.0, 1.0);
+                            await prefs.setDouble('energy', newEnergy);
+
+                            context.read<ProgressCubit>().updateProgress(widget.mission);
                           },
+
+
                           child: Icon(
                               widget.mission.status == StatusEnum.completed
                                 ? Icons.done

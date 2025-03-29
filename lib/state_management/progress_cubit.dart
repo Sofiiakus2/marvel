@@ -29,25 +29,23 @@ class ProgressCubit extends Cubit<double> {
     await prefs.setDouble('energy', energy);
   }
 
-  void updateProgress(List<MissionModel> missions) async {
+  void updateProgress(MissionModel mission) async {
     double energy = state;
 
-    for (var mission in missions) {
-      if (mission.status == StatusEnum.completed) {
-        switch (mission.treatLevel) {
-          case TreatLevelEnum.low:
-            energy -= 0.06;
-            break;
-          case TreatLevelEnum.medium:
-            energy -= 0.1;
-            break;
-          case TreatLevelEnum.high:
-            energy -= 0.25;
-            break;
-          case TreatLevelEnum.worldEnding:
-            energy -= 0.5;
-            break;
-        }
+    if (mission.status == StatusEnum.completed) {
+      switch (mission.treatLevel) {
+        case TreatLevelEnum.low:
+          energy = energy - 0.1;
+          break;
+        case TreatLevelEnum.medium:
+          energy = energy - 0.25;
+          break;
+        case TreatLevelEnum.high:
+          energy = energy - 0.45;
+          break;
+        case TreatLevelEnum.worldEnding:
+          energy = energy - 0.7;
+          break;
       }
     }
 
@@ -57,7 +55,7 @@ class ProgressCubit extends Cubit<double> {
   }
 
   void _startEnergyRecovery() {
-    _recoveryTimer = Timer.periodic(Duration(seconds: 10), (timer) async {
+    _recoveryTimer = Timer.periodic(Duration(seconds: 60), (timer) async {
       double newEnergy = (state + 0.1).clamp(0.0, 1.0);
       emit(newEnergy);
       await _saveEnergy(newEnergy);

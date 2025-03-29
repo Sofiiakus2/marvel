@@ -34,7 +34,6 @@ class TasksListView extends StatelessWidget {
                 },
                   child: IronManSpeech(ironManText: 'Tap to create first mission!')));
         }
-        context.read<ProgressCubit>().updateProgress(missions);
         return ListView.builder(
           shrinkWrap: true,
           physics: const AlwaysScrollableScrollPhysics(),
@@ -77,7 +76,7 @@ class TasksListView extends StatelessWidget {
                     ),
                   );
                 },
-                  child: TaskBlockView(mission:missions[index]));
+                  child: TaskBlockView(mission:missions[index], missions: missions,));
             } else {
               return _buildAddButton(context);
             }
