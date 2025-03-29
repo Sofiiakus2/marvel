@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:marvel_t/features/home/progress_painter.dart';
+import 'package:marvel_t/features/home/avatar/progress_painter.dart';
 
 class AvatarCircle extends StatefulWidget {
   final double size;

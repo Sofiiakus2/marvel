@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marvel_t/features/background.dart';
-import 'package:marvel_t/features/home/avatar_circle.dart';
-import 'package:marvel_t/features/home/tasks.dart';
+import 'package:marvel_t/features/home/avatar/avatar_circle.dart';
+import 'package:marvel_t/features/home/missions/tasks.dart';
 
 import '../../state_management/progress_cubit.dart';
 

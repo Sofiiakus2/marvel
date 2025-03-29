@@ -30,7 +30,7 @@ class AuthService{
       await saveSuperheroToFirestore(superheroWithId);
 
     } catch (e) {
-      print('Помилка реєстрації: $e');
+      rethrow;
     }
   }
 
@@ -41,9 +41,8 @@ class AuthService{
 
       await superheroes.doc(superhero.id).set(superhero.toMap());
 
-      print('Герой збережений у Firestore!');
     } catch (e) {
-      print('Помилка збереження героя: $e');
+      rethrow;
     }
   }
 
@@ -56,7 +55,7 @@ class AuthService{
       saveLoginState(userCredential.user!.uid);
       return userCredential.user != null;;
     } catch (e) {
-      throw Exception('Помилка входу: $e');
+      rethrow;
     }
   }
 }

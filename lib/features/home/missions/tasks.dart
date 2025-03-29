@@ -4,11 +4,11 @@ import 'package:marvel_t/data/models/mission_model.dart';
 import 'package:marvel_t/data/services/missions_service.dart';
 import 'package:marvel_t/data/services/notification/notification_service.dart';
 import 'package:marvel_t/features/authorization/iron_man_speech.dart';
-import 'package:marvel_t/features/home/task_block.dart';
+import 'package:marvel_t/features/home/missions/task_block.dart';
 import 'package:marvel_t/theme.dart';
 
-import '../../data/models/enums.dart';
-import '../../state_management/progress_cubit.dart';
+import '../../../data/models/enums.dart';
+import '../../../state_management/progress_cubit.dart';
 import 'add_mission_dialog.dart';
 
 class TasksListView extends StatelessWidget {
@@ -18,7 +18,7 @@ class TasksListView extends StatelessWidget {
   void checkPendingMissions() {
     int pendingMissions = missions.where((mission) => mission.status != StatusEnum.completed).length;
 
-    if (pendingMissions > 5) {  // Show alert if more than 5 missions are pending
+    if (pendingMissions > 5) {
       NotificationService.showEmergencyAlert();
     }
   }

@@ -5,8 +5,8 @@ import 'package:marvel_t/data/services/missions_service.dart';
 import 'package:marvel_t/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../data/models/enums.dart';
-import '../../state_management/progress_cubit.dart';
+import '../../../data/models/enums.dart';
+import '../../../state_management/progress_cubit.dart';
 
 
 class TaskBlockView extends StatefulWidget {

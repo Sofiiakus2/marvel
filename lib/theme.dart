@@ -13,14 +13,6 @@ final lightTheme = ThemeData(
   useMaterial3: true,
   primaryColor: primaryColor,
   textTheme: textTheme,
-  dividerTheme: const DividerThemeData(
-    // color: Colors.black,
-    thickness: 1,
-    space: 10,
-  ),
-  bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: Colors.white
-  ),
   colorScheme: ColorScheme.fromSeed(
     seedColor: primaryColor,
     brightness: Brightness.dark,

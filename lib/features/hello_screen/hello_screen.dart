@@ -54,8 +54,8 @@ class _HelloScreenState extends State<HelloScreen> {
               child: FittedBox(
                 fit: BoxFit.cover,
                 child: SizedBox(
-                  width: _controller.value.size?.width ?? 0,
-                  height: _controller.value.size?.height ?? 0,
+                  width: _controller.value.size.width,
+                  height: _controller.value.size.height,
                   child: VideoPlayer(_controller),
                 ),
               ),

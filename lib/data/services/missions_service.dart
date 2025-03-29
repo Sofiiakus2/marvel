@@ -12,8 +12,7 @@ class MissionService {
     try {
       await _firestore.collection('missions').add(mission.toMap());
     } catch (e) {
-      print('Помилка створення місії: $e');
-      throw Exception('Помилка створення місії: $e');
+      throw Exception(e);
     }
   }
 
@@ -21,9 +20,7 @@ class MissionService {
     try {
       await _firestore.collection('missions').doc(mission.id).update(mission.toMap());
     } catch (e) {
-      print('Помилка оновлення місії: $e');
-      throw Exception('Помилка оновлення місії: $e');
-    }
+      throw Exception(e);    }
   }
 
   Stream<List<MissionModel>> getHeroMissionsStream() {
@@ -38,18 +35,14 @@ class MissionService {
         return snapshot.docs.map((doc) => MissionModel.fromFirestore(doc)).toList();
       });
     } catch (e) {
-      print('Помилка отримання місій: $e');
-      throw Exception('Помилка отримання місій: $e');
-    }
+      throw Exception(e);    }
   }
 
   Future<void> deleteMission(String missionId) async {
     try {
       await _firestore.collection('missions').doc(missionId).delete();
     } catch (e) {
-      print('Помилка видалення місії: $e');
-      throw Exception('Помилка видалення місії: $e');
-    }
+      throw Exception(e);    }
   }
 
   int getPendingMissions(List<MissionModel> missions) {
