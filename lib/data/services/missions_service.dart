@@ -1,13 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../models/enums.dart';
 import '../models/mission_model.dart';
 
 
 class MissionService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  // Створення місії для героя
   Future<void> createMission(MissionModel mission) async {
     try {
       await _firestore.collection('missions').add(mission.toMap());
@@ -50,5 +50,9 @@ class MissionService {
       print('Помилка видалення місії: $e');
       throw Exception('Помилка видалення місії: $e');
     }
+  }
+
+  int getPendingMissions(List<MissionModel> missions) {
+    return missions.where((mission) => mission.status != StatusEnum.completed).length;
   }
 }

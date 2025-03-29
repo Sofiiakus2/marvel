@@ -158,6 +158,7 @@ class _TaskBlockViewState extends State<TaskBlockView> {
                             await prefs.setDouble('energy', newEnergy);
 
                             context.read<ProgressCubit>().updateProgress(widget.mission);
+
                           },
 
 
