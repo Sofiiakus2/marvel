@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:marvel_t/features/hello_screen/slide_to_confirm_button.dart';
 import 'package:marvel_t/features/hello_screen/speech_buble.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:video_player/video_player.dart';
 
 class HelloScreen extends StatefulWidget {
@@ -16,6 +17,7 @@ class _HelloScreenState extends State<HelloScreen> {
   @override
   void initState() {
     super.initState();
+    _checkLoginStatus();
     _controller = VideoPlayerController.asset('assets/background/background.mp4')
       ..initialize().then((_) {
         _controller.play();
@@ -28,6 +30,17 @@ class _HelloScreenState extends State<HelloScreen> {
   void dispose() {
     super.dispose();
     _controller.dispose();
+  }
+
+  Future<void> _checkLoginStatus() async {
+    await Future.delayed(Duration(seconds: 2));
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    bool isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+    if (isLoggedIn) {
+      Navigator.pushReplacementNamed(context, '/home');
+    }
   }
 
   @override

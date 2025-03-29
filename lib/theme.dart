@@ -44,6 +44,11 @@ final textTheme = TextTheme(
       fontWeight: FontWeight.bold,
       color: Colors.white
   ),
+  titleMedium: GoogleFonts.bangers(
+      fontSize: 24,
+      fontWeight: FontWeight.bold,
+      color: Colors.white
+  ),
 
 
 );

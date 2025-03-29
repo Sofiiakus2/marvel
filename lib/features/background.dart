@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
 class Background extends StatelessWidget {
-  const Background({super.key});
+  final Color color;
+
+  Background({
+    this.color = Colors.black54,
+  });
+
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +25,7 @@ class Background extends StatelessWidget {
         Container(
           width: double.infinity,
           height: double.infinity,
-          color: Colors.black54,
+          color: color,
         ),
       ],
     );

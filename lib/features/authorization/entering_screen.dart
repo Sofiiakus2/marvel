@@ -109,7 +109,7 @@ class _EnteringScreenState extends State<EnteringScreen> {
                             password: passwordController.text
                         );
                         if(await AuthService().signInSuperhero(hero)){
-                          //Navigator.pushNamed(context, "/bottomNavBar");
+                          Navigator.pushReplacementNamed(context, "/home");
                         }
                       },
                       style: ButtonStyle(

@@ -1,8 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marvel_t/features/authorization/entering_screen.dart';
 import 'package:marvel_t/features/authorization/registration_screen.dart';
 import 'package:marvel_t/features/hello_screen/hello_screen.dart';
+import 'package:marvel_t/features/home/home_screen.dart';
+import 'package:marvel_t/state_management/progress_cubit.dart';
 import 'package:marvel_t/theme.dart';
 
 void main() async{
@@ -23,17 +26,24 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Marvel',
-      theme: lightTheme,
-      initialRoute: '/',
-      routes: {
-        '/':(context) => HelloScreen(),
-        '/registration':(context)=> RegistrationScreen(),
-        '/entering':(context)=>EnteringScreen(),
-
-      },
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<ProgressCubit>(
+          create: (context) => ProgressCubit(),
+        )
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Marvel',
+        theme: lightTheme,
+        initialRoute: '/',
+        routes: {
+          '/':(context) => HelloScreen(),
+          '/registration':(context)=> RegistrationScreen(),
+          '/entering':(context)=>EnteringScreen(),
+          '/home':(context)=>HomeScreen(),
+        },
+      ),
     );
   }
 }
