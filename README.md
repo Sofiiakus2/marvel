@@ -1,16 +1,28 @@
-# marvel
+# marvel Superhero mission control
 
-A new Flutter project.
+## Core Functionality Implementation:
 
-## Getting Started
+ - Authentication (Firebase Authentication):
+Firebase Authentication will be used to implement superhero login functionality.
+Users will be able to log in as predefined superheroes (Iron Man, Spiderman, etc.).
 
-This project is a starting point for a Flutter application.
+ - Mission Management (Firebase Firestore):
+Firebase Firestore will be used as the database for storing and managing mission data.
+Mission data will include: Mission Name, Threat Level (enum: Low, Medium, High, World-Ending), Status (enum: Ongoing, Completed).
+CRUD operations (create, read, update, delete) for missions will be implemented using Firestore's API.
+Data modeled by using dart classes, and converted to and from firestore documents.
 
-A few resources to get you started if this is your first Flutter project:
+ - Superhero Energy Meter (Cubit, Custom Painter):
+A Cubit will manage the superhero's fatigue level (progress bar).
+Progress will be calculated based on defined coefficients based on the difficulty of completed missions.
+A custom painter will be used to render the progress bar in a visually appealing way.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+ - Avengers Emergency Alert (Awesome Notifications, Cubit):
+A Cubit will monitor the number of pending missions.
+If a predefined threshold is exceeded, Awesome Notifications will be used to trigger a local notification: "Nick Fury is calling!".
+This will provide the user with an emergency alert.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Architecture:
+
+ - Modularity: The project exhibits a modular structure, where each feature or module is encapsulated within distinct folders.
+ - State Management: Cubit is utilized for state management, promoting predictability and simplifying testing.
