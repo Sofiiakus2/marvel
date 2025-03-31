@@ -26,3 +26,6 @@ This will provide the user with an emergency alert.
 
  - Modularity: The project exhibits a modular structure, where each feature or module is encapsulated within distinct folders.
  - State Management: Cubit is utilized for state management, promoting predictability and simplifying testing.
+
+##Video end .env:
+https://drive.google.com/drive/folders/1O7yraCmcRias-5MPDG_9a8DtCcqBu3P_
